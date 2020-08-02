@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Shipment.ObjectModel.DTO.ShipmentPackageDTO>
+
+@{
+    ViewData["Title"] = "Shipments List";
+}
+
+<div class="text-center">
+    <h1>Today's Shipments</h1>
+    <p>Red lines mean return to delivery center.</p>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.PackageNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DeliveryAddressNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PackageWeightInKilos)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApproximateDeliveryTime)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td @{if (item.LastStopOfTour) { <text>style="border-bottom: 1pt solid crimson;"</text> }}>
+                    @Html.DisplayFor(modelItem => item.PackageNumber)
+                </td>
+                <td @{if (item.LastStopOfTour) { <text>style="border-bottom: 1pt solid crimson;"</text> }}>
+                    @Html.DisplayFor(modelItem => item.DeliveryAddressNumber)
+                </td>
+                <td @{if (item.LastStopOfTour) { <text>style="border-bottom: 1pt solid crimson;"</text> }}>
+                    @Html.DisplayFor(modelItem => item.PackageWeightInKilos) kg
+                </td>
+                <td @{if (item.LastStopOfTour) { <text>style="border-bottom: 1pt solid crimson;"</text> }}>
+                    @Html.DisplayFor(modelItem => item.ApproximateDeliveryTime)
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

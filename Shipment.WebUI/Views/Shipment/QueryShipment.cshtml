@@ -1,0 +1,71 @@
+﻿@model Shipment.ObjectModel.DTO.ShipmentPackageDTO
+
+@{
+    ViewData["Title"] = "Query Shipment";
+}
+
+<div class="text-center">
+    <h1>Query Shipment</h1>
+
+    <p>You can query your shipment details using the Package Number</p>
+
+    <div>
+        @using (Html.BeginForm())
+        {
+            <p>
+                Package Number: @Html.TextBox("PackageNumber")
+                <input type="submit" value="Search" />
+            </p>
+        }
+    </div>
+</div>
+
+<br />
+
+@if (Model != null)
+{
+    <div>
+        <h4>Package Details</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PackageNumber)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PackageNumber)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DeliveryAddressNumber)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DeliveryAddressNumber)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.PackageWeightInKilos)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.PackageWeightInKilos) kg
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ApproximateDeliveryTime)
+            </dt>
+            <dd class="col-sm-10">
+                @if (Model.ApproximateDeliveryTime.HasValue)
+                {
+                    @Html.DisplayFor(model => model.ApproximateDeliveryTime)
+                }
+                else
+                {
+                    @Html.Label("WontBeDelivered", "Package will not be delivered today.")
+                }
+            </dd>
+        </dl>
+    </div>
+}
+else
+{
+
+    <div class="text-center">
+        <p>@ViewBag.Message</p>
+    </div>
+}
